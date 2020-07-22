@@ -2,9 +2,9 @@
 ## Container List:
 1. nginx
 1. php engine
-   * php7.4
+   * php 7.4
    * php-fpm
-   * laravel
+   * Laravel
 1. SQL Server 2019
 1. Redis
 
