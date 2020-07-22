@@ -1,5 +1,10 @@
 # Docker container group for Laravel development
-## Container List:
+
+## Requirement
+* Mac OSX with [Docker](https://www.docker.com/) installed.
+
+
+## Container List
 1. nginx
 1. php engine
    * php 7.4
