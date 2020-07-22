@@ -2,6 +2,8 @@ up:
 	docker-compose up -d
 build:
 	docker-compose build --no-cache --force-rm
+restart:
+	docker-compose restart
 container:
 	@make build
 	@make up
@@ -9,3 +11,4 @@ container:
 	docker-compose exec php chmod -R 777 storage/ bootstrap/cache/
 	docker-compose exec php composer require --dev barryvdh/laravel-ide-helper
 	docker-compose exec php composer require --dev barryvdh/laravel-debugbar
+	@make restart
