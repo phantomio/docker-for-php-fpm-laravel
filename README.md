@@ -9,9 +9,9 @@
 1. php engine
    * php 7.4
    * php-fpm
-   * Laravel
+   * Laravel 7.21.0
 1. SQL Server 2019
-1. Redis
+1. Redis 6.0.5
 
 # Installion
 1. Replace <your password> with your SQL Server password under docker-compose.yml
