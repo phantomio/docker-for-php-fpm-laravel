@@ -5,7 +5,7 @@
 
 
 ## Container List
-1. nginx
+1. nginx 1.19.1
 1. php engine
    * php 7.4
    * php-fpm
