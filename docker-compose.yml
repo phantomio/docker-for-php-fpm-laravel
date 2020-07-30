@@ -1,9 +1,10 @@
-version: '2'
+version: '2.4'
 
 services:
   nginx:
     image: nginx
     container_name: "laravel-nginx"
+    hostname: laravel-nginx
     ports:
       - "80:80"
     volumes:
@@ -11,19 +12,28 @@ services:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
   php:
     build: ./php
+    image: laravel-php-fpm:1.0
     container_name: "laravel-php"
+    hostname: laravel-php
     volumes:
       - ./src:/src
   sqlsrv:
     container_name: "laravel-sqlsrv"
-    image: mcr.microsoft.com/mssql/server:2019-GA-ubuntu-16.04
+    image: mcr.microsoft.com/mssql/server:2019-CU5-ubuntu-18.04
+    hostname: laravel-sqlsrv
     ports:
       - "1433:1433"
+    volumes:
+      - sqlsrvDataDir:/var/opt/mssql
     environment:
       ACCEPT_EULA: Y
-      MSSQL_SA_PASSWORD: <your password>
+      SA_PASSWORD: $SA_PASSWORD
+    
   redis:
     image: redis:alpine
     container_name: "laravel-redis"
+    hostname: laravel-redis
     ports: 
       - 6379:6379
+volumes:
+  sqlsrvDataDir:
