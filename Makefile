@@ -2,6 +2,10 @@ up:
 	docker-compose up -d
 build:
 	docker-compose build --build-arg SA_PASSWORD=$(SA_PASSWORD) --force-rm
+start:
+	docker-compose start
+stop:
+	docker-compose stop
 restart:
 	docker-compose restart
 install:
