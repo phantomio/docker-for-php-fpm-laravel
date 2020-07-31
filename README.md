@@ -14,15 +14,12 @@
 1. Redis 6.0.5
 
 # Installion
-1. Replace <your password> with your SQL Server password under docker-compose.yml
-```yml
-  sqlsrv:
-    ...
-    ...
-    environment:
-      ACCEPT_EULA: Y
-      MSSQL_SA_PASSWORD: <your password> <-- here
-    ...
-```
+run ```make install SA_PASSWORD=<Your Strong Password>``` under root directory
 
-2. run ```make container``` under root directory
+# Commands
+1. ```make install SA_PASSWORD=<Your Strong Password>```: Builds images and ```make up```.
+1. ```make up```: Builds, (re)creates, starts, and attaches to containers, alternative to ```docker-compose up -d```.
+1. ```make down```: Stops and removes containers, alternative to ```docker-compose down```.
+1. ```make stop```: Stops existing containers, alternative to ```docker-compose stop```.
+1. ```make start```: Starts existing containers, alternative to ```docker-compose start```.
+1. ```make restart```: Restarts all stopped and running services, alternative to ```docker-compose restart```.
