@@ -1,16 +1,6 @@
 ARG SA_PASSWORD
 FROM php:fpm
 
-ENV DB_CONNECTION=sqlsrv \
-  DB_HOST=laravel-sqlsrv \
-  DB_PORT=1433 \
-  DB_DATABASE=master \
-  DB_USERNAME=SA \
-  DB_PASSWORD=$SA_PASSWORD \
-  REDIS_HOST=laravel-redis \
-  REDIS_PASSWORD=null \
-  REDIS_PORT=6379
-
 # For composer
 RUN apt-get update \
     && apt-get install -y gnupg2 \

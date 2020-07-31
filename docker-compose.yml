@@ -18,8 +18,8 @@ services:
     volumes:
       - ./src:/src
   sqlsrv:
-    container_name: "laravel-sqlsrv"
     image: mcr.microsoft.com/mssql/server:2019-CU5-ubuntu-18.04
+    container_name: "laravel-sqlsrv"
     hostname: laravel-sqlsrv
     ports:
       - "1433:1433"
@@ -28,7 +28,12 @@ services:
     environment:
       ACCEPT_EULA: Y
       SA_PASSWORD: $SA_PASSWORD
-    
+  init-data:
+    image: mcr.microsoft.com/mssql-tools:latest
+    container_name: "laravel-db-initiator"
+    volumes:
+      - ./init-data/init.sql:/tmp/init.sql
+    command: bash -c "sleep 60s && /opt/mssql-tools/bin/sqlcmd -S laravel-sqlsrv -U SA -P $SA_PASSWORD -d master -i /tmp/init.sql" 
   redis:
     image: redis:alpine
     container_name: "laravel-redis"
