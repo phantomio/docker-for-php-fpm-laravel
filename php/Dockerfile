@@ -34,11 +34,15 @@ ENV DB_CONNECTION=sqlsrv \
   DB_PORT=1433 \
   DB_USERNAME=SA
 
-# Install sqlsrv
+# Install sqlsrv pdo_sqlsrv
 RUN pecl install sqlsrv pdo_sqlsrv \
     && printf "; priority=20\nextension=sqlsrv.so\n" > /usr/local/etc/php/conf.d/sqlsrv.ini \
     && printf "; priority=30\nextension=pdo_sqlsrv.so\n" > /usr/local/etc/php/conf.d/pdo_sqlsrv.ini \
     && docker-php-ext-enable sqlsrv pdo_sqlsrv
+
+# Connection Pooling fot sqlsrv
+RUN echo "[ODBC]" >> /etc/odbcinst.ini \
+    && echo "Pooling=Yes" >> /etc/odbcinst.ini
 
 # Install laravel installer & debugbar
 RUN composer global require "laravel/installer"

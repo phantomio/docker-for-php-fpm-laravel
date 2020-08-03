@@ -1,3 +1,6 @@
+ifndef SA_PASSWORD
+$(error Database password is required, e.g. make install SA_PASSWORD=<your password>)
+endif
 up:
 	docker-compose up -d
 build:
