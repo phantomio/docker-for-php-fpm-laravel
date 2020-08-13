@@ -1,9 +1,6 @@
 up:
 	docker-compose up -d
 build:
-# ifndef SA_PASSWORD \
-$(error Database password is required, e.g. make install SA_PASSWORD=<your password>) \
-endif
 	docker-compose build --build-arg SA_PASSWORD=$(SA_PASSWORD) --force-rm
 start:
 	docker-compose start

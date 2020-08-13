@@ -52,7 +52,32 @@ RUN apt-get update \
     && apt-get install -y libpq-dev \
     && docker-php-ext-install pdo_mysql pdo_pgsql
 
-# Install Node.js
-RUN apt-get install -y nodejs
+# Install NVM & NodeJs v12
+ENV NVM_DIR /usr/local/nvm
+ENV NODE_VERSION v12
+
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+# RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.30.1/install.sh | bash \
+#     && source $NVM_DIR/nvm.sh \
+#     && nvm install $NODE_VERSION \
+#     && nvm alias default $NODE_VERSION \
+#     && nvm use default
+
+
+RUN apt-get install -y git vim curl build-essential \
+    && git clone https://github.com/creationix/nvm.git /opt/nvm \
+    && mkdir /usr/local/nvm \
+    && export NVM_DIR=/usr/local/nvm \
+    && source /opt/nvm/nvm.sh \
+    && nvm install v12
+
+# Install yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+    && apt-get update \
+    && apt-get install -y yarn
+
+# Install Quasar Cli
+RUN yarn global add @quasar/cli
 
 WORKDIR /src
